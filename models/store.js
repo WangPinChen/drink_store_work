@@ -13,7 +13,7 @@ const sotreSchema = new Schema({
     type: String,
     required: true
   },
-  city_id: {
+  cityId: {
     type: Schema.Types.ObjectId,
     ref: 'City',
     index: true,

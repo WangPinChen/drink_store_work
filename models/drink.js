@@ -9,7 +9,7 @@ const drinkSchema = new Schema({
     type: String,
   },
   desc: {
-    type: Text,
+    type: String,
   },
   isPopular: {
     type: Boolean,

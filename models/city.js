@@ -4,6 +4,9 @@ const citySchema = new Schema({
   name: {
     type: String,
     required: true
+  },
+  index: {
+    type: Number
   }
 })
 
