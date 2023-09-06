@@ -1,12 +1,41 @@
-<div class="d-block" style="width: 15%;">
-  <ul>
-    <li>產品清單</li>
-    <li>門市清單</li>
-    <li>帳號管理</li>
+<style>
+  ul {
+    margin-top: 3rem;
+  }
+
+  li:hover {
+    background: brown;
+    color: white;
+  }
+
+  button {
+    height: 3rem;
+    width: 100%;
+    background: brown;
+    color: white;
+  }
+
+  button:hover {
+    background: rgb(214, 55, 55);
+  }
+</style>
+
+<div class="d-flex flex-column justify-content-between border" style="width: 15%;height:100vh">
+  <ul class="list-group list-group-flush">
+    <a href="">
+      <li class="list-group-item">飲料清單</li>
+    </a>
+    <a href="">
+      <li class="list-group-item">門市清單</li>
+    </a>
+    <a href="">
+      <li class="list-group-item">帳號管理</li>
+    </a>
   </ul>
-  <div>
-    <h1>
+  <form action="/adimn/logout" method="post">
+    <button type="submit">
+      <i class="fa-solid fa-right-from-bracket"></i>
       登出
-    </h1>
-  </div>
+    </button>
+  </form>
 </div>
