@@ -1,4 +1,4 @@
-const passport = require('passport')
+const Drink = require('../models/drink')
 
 const adminController = {
   loginPage: (req, res) => {
@@ -8,8 +8,9 @@ const adminController = {
   login: (req, res) => {
     res.redirect('/admin/drinks')
   },
-  getDrinks: (req, res) => {
-    res.render('admin/drinks')
+  getDrinks: async (req, res) => {
+    const drinks = await Drink.find().lean().sort({ name: 'asc' })
+    res.render('admin/drinks', { drinks })
   }
 }
 
