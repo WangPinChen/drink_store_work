@@ -77,18 +77,17 @@
         <div class="text-container p-3">
           <div>
             <label for="name">名稱 :</label>
-
-            <input type="text" id="name" placeholder="{{drink.name}}" disabled>
+            <input name="name" type="text" id="name" value="{{drink.name}}" disabled>
           </div>
           <div class="checkbox-container d-flex">
             <div>
               <label for="is-popular">熱門</label>
-              <input name="is-popular" id="is-popular" type="checkbox" {{#if drink.isPopular}}checked{{else}}{{/if}}
+              <input name="isPopular" id="is-popular" type="checkbox" {{#if drink.isPopular}}checked{{else}}{{/if}}
                 disabled>
             </div>
             <div>
               <label for="is-delisted">失效</label>
-              <input name="is-delisted" id="is-delisted" type="checkbox" {{#if drink.isDelisted}}checked{{else}}{{/if}}
+              <input name="isDelisted" id="is-delisted" type="checkbox" {{#if drink.isDelisted}}checked{{else}}{{/if}}
                 disabled>
             </div>
           </div>

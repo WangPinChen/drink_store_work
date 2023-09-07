@@ -19,6 +19,22 @@ const adminController = {
   editDrinkPage: async (req, res) => {
     const drink = await Drink.findOne({ _id: req.params.id }).lean()
     res.render('admin/edit', { drink })
+  },
+  putDrink: async (req, res) => {
+    const drink = await Drink.findOne({ _id: req.params.id })
+    console.log(drink)
+    console.log(req.body)
+    const { name, note } = req.body
+    const isPopular = req.body.isPopular ? true : false
+    const isDelisted = req.body.isDelisted ? true : false
+
+    drink.name = name;
+    drink.note = note;
+    drink.isPopular = isPopular;
+    drink.isDelisted = isDelisted;
+
+    await drink.save()
+    res.redirect(`/admin/drinks/${req.params.id}`)
   }
 
 }
