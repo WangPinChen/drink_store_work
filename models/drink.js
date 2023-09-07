@@ -15,6 +15,13 @@ const drinkSchema = new Schema({
     type: Boolean,
     default: false
   },
+  isDelisted: {
+    type: Boolean,
+    default: false
+  },
+  note: {
+    type: String,
+  },
   createdBy: {
     type: Schema.Types.ObjectId,
     ref: 'User',

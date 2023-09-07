@@ -1,0 +1,108 @@
+<style>
+  .drink-form {
+    margin: 3rem;
+  }
+
+  .drink-container {
+    border-bottom: 1px solid rgb(181, 178, 178);
+  }
+
+  .text-container {
+    width: 100%;
+  }
+
+  .text-container div {
+    margin: 1rem 0;
+  }
+
+  .text-container input {
+    border: none;
+    border-bottom: 1px solid rgb(181, 178, 178);
+  }
+
+  .text-container input:hover {
+    border-bottom: 1px solid brown;
+  }
+
+  .text-container input:focus {
+    outline: none;
+    border-bottom: 1px solid brown;
+  }
+
+  .text-container textarea {
+    border: 1px solid rgb(181, 178, 178);
+  }
+
+  .text-container textarea:hover {
+    border: 1px solid brown;
+  }
+
+  .text-container textarea:focus {
+    outline: none;
+    border: 1px solid brown;
+  }
+
+  .img-container img {
+    width: 350px;
+    height: 350px;
+  }
+
+  .checkbox-container div {
+    margin: 0 1rem 0 0;
+  }
+
+  .drink-form button {
+    width: 200px;
+  }
+
+  .delete-button,
+  .edit-button {
+    color: black;
+    background-color: #E9E5E2;
+  }
+
+  .edit-button:hover {
+    background-color: gray;
+  }
+</style>
+
+<div class="d-flex">
+  {{> admin-sidebar}}
+  <main class="ms-2 me-2 border w-100">
+    <form class="drink-form" action="/admin/drinks/{{drink._id}}/edit" method="get">
+      <div class="drink-container d-flex mb-3">
+        <div class="img-container">
+          <img src="{{#if drink.image}} {{drink.image}} {{else}}https://i.imgur.com/EfBh0sM.png {{/if}}" alt="">
+        </div>
+        <div class="text-container p-3">
+          <div>
+            <label for="name">名稱 :</label>
+
+            <input type="text" id="name" placeholder="{{drink.name}}" disabled>
+          </div>
+          <div class="checkbox-container d-flex">
+            <div>
+              <label for="is-popular">熱門</label>
+              <input name="is-popular" id="is-popular" type="checkbox" {{#if drink.isPopular}}checked{{else}}{{/if}}
+                disabled>
+            </div>
+            <div>
+              <label for="is-delisted">失效</label>
+              <input name="is-delisted" id="is-delisted" type="checkbox" {{#if drink.isDelisted}}checked{{else}}{{/if}}
+                disabled>
+            </div>
+          </div>
+          <div class="d-block">
+            <label class="d-block" for="note">備註 :</label>
+            <textarea name="note" id="note" cols="90" rows="10" disabled>{{drink.note}}</textarea>
+          </div>
+        </div>
+      </div>
+      <button class="edit-button">編輯</button>
+      <form action="/admin/drinks/ /delete" method="post">
+        <button class="delete-button">刪除</button>
+      </form>
+    </form>
+
+  </main>
+</div>
