@@ -15,11 +15,8 @@
     height: auto;
   }
 
-  input {
+  .search-input {
     width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
   }
 
   .sort-button {
@@ -99,10 +96,12 @@
   {{> admin-sidebar}}
   <main class="ms-2 me-2 border w-100">
     <div class="top-controller d-flex justify-content-between m-2">
-      <button class="create-button" style="width: 150px;">新增</button>
+      <button class="create-button" style="width: 150px;" data-bs-toggle="modal" data-bs-target="#create-modal">
+        新增
+      </button>
 
       <form class="search-form" action="" method="post" style="display: flex;">
-        <input type="text">
+        <input class="search-input" type="text">
         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
 
@@ -167,4 +166,42 @@
 
     </ul>
   </main>
+</div>
+
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">新增</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/admin/drink" method="post">
+        <div class="modal-body">
+          <div class="mb-4">
+            <label for="name" class="me-2">飲料名稱 :</label>
+            <input name="name" id="name" type="text">
+          </div>
+          <div class="d-flex mb-4">
+            <label for="note" class="me-2">備　　註 :</label>
+            <textarea nname="note" id="note" cols="40"></textarea>
+          </div>
+
+          <div class="avatar-holder">
+            <img src="{{#if user.avatar}}{{user.avatar}}{{else}}DEFAULT_AVATAR{{/if}}" id="avatar-image"
+              class="rounded-circle" alt="user_Aavtor" height="140px" width="140px"
+              style="filter: brightness(70%);border: 2px solid white; position: absolute; object-fit: cover; top: 40%; left: 3%;">
+          </div>
+          <label for="avatar" class=" form-label">
+            <input class="d-none" type="file" id="avatar" name="avatar" accept="image/*" style="display: none">
+            <img src="/images/camera.svg" class="btn"
+              style="position: absolute; top: 73%; left: 14%; transform: translate(-50%, -50%); color: white; alt="" " />
+          </label>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit">儲存</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

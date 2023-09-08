@@ -15,33 +15,6 @@
     margin: 1rem 0;
   }
 
-  .text-container input {
-    border: none;
-    border-bottom: 1px solid rgb(181, 178, 178);
-  }
-
-  .text-container input:hover {
-    border-bottom: 1px solid brown;
-  }
-
-  .text-container input:focus {
-    outline: none;
-    border-bottom: 1px solid brown;
-  }
-
-  .text-container textarea {
-    border: 1px solid rgb(181, 178, 178);
-  }
-
-  .text-container textarea:hover {
-    border: 1px solid brown;
-  }
-
-  .text-container textarea:focus {
-    outline: none;
-    border: 1px solid brown;
-  }
-
   .img-container img {
     width: 350px;
     height: 350px;
@@ -70,33 +43,7 @@
   {{> admin-sidebar}}
   <main class="ms-2 me-2 border w-100">
     <form class="drink-form" action="/admin/drinks/{{drink._id}}?_method=PUT" method="POST">
-      <div class="drink-container d-flex mb-3">
-        <div class="img-container">
-          <img src="{{#if drink.image}} {{drink.image}} {{else}}https://i.imgur.com/EfBh0sM.png {{/if}}" alt="">
-        </div>
-        <div class="text-container p-3">
-          <div>
-            <label for="name">名稱 :</label>
-            <input name="name" type="text" id="name" value="{{drink.name}}">
-          </div>
-          <div class="checkbox-container d-flex">
-            <div>
-              <label for="is-popular">熱門</label>
-              <input name="isPopular" id="is-popular" type="checkbox" {{#if drink.isPopular}}checked value="true"
-                {{else}} {{/if}}>
-            </div>
-            <div>
-              <label for="is-delisted">失效</label>
-              <input name="isDelisted" id="is-delisted" type="checkbox" {{#if drink.isDelisted}}checked value="true"
-                {{else}} {{/if}}>
-            </div>
-          </div>
-          <div class="d-block">
-            <label class="d-block" for="note">備註 :</label>
-            <textarea name="note" id="note" cols="90" rows="10">{{drink.note}}</textarea>
-          </div>
-        </div>
-      </div>
+      {{> admin-drink-form }}
       <button type="submit" class="edit-button">儲存</button>
       <form action="/admin/drinks/ /delete" method="post">
         <button class="delete-button">刪除</button>

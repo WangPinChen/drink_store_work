@@ -1,0 +1,27 @@
+<div class="drink-container d-flex mb-3">
+  <div class="img-container">
+    <img src="{{#if drink.image}} {{drink.image}} {{else}}https://i.imgur.com/EfBh0sM.png {{/if}}" alt="">
+  </div>
+  <div class="text-container p-3">
+    <div>
+      <label for="name">名稱 :</label>
+      <input name="name" type="text" id="name" value="{{drink.name}}" {{#if isViewOnly}}disabled{{/if}}>
+    </div>
+    <div class="checkbox-container d-flex">
+      <div>
+        <label for="is-popular">熱門</label>
+        <input name="isPopular" id="is-popular" type="checkbox" {{#if drink.isPopular}}checked value="true" {{else}}
+          {{/if}} {{#if isViewOnly}}disabled{{/if}}>
+      </div>
+      <div>
+        <label for="is-delisted">失效</label>
+        <input name="isDelisted" id="is-delisted" type="checkbox" {{#if drink.isDelisted}}checked value="true" {{else}}
+          {{/if}} {{#if isViewOnly}}disabled{{/if}}>
+      </div>
+    </div>
+    <div class="d-block">
+      <label class="d-block" for="note">備註 :</label>
+      <textarea name="note" id="note" cols="90" rows="10" {{#if isViewOnly}}disabled{{/if}}>{{drink.note}}</textarea>
+    </div>
+  </div>
+</div>
