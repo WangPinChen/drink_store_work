@@ -71,11 +71,8 @@
   <main class="ms-2 me-2 border w-100">
     <form class="drink-form" action="/admin/drinks/{{drink._id}}/edit" method="get">
       {{> admin-drink-form isViewOnly=true}}
-      <button class="edit-button">編輯</button>
-      <form action="/admin/drinks/ /delete" method="post">
-        <button class="delete-button">刪除</button>
-      </form>
     </form>
-
   </main>
 </div>
+
+<script src="/javascripts/delete-confirm-single.js"></script>

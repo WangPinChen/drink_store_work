@@ -32,15 +32,35 @@ const adminController = {
     res.redirect(`/admin/drinks/${req.params.id}`)
   },
   postDrink: async (req, res) => {
-    console.log(req.user)
     await Drink.create({
       name: req.body.name,
       note: req.body.note,
       createdBy: req.user._id
     })
     res.redirect('/admin/drinks')
+  },
+  deleteDrink: async (req, res) => {
+    const drink = await Drink.findOne({ _id: req.params.id })
+    if (!drink) {
+      console.log('飲品不存在')
+      res.redirect('/admin/drinks')
+    }
+    await drink.remove()
+    res.redirect('/admin/drinks')
+  },
+  searchDrink: async (req, res) => {
+    const { keyword } = req.body
+    if (!keyword || keyword.trim() === '') {
+      console.log('關鍵字無效')
+      return res.redirect('back')
+    }
+    const searchDrinks = await Drink.find({ name: { $regex: keyword, $options: 'i' } }).lean()
+    if (searchDrinks.length === 0) {
+      const message = `很抱歉，輸入之關鍵字『${keyword}』未有任何匹配結果。`
+      return res.render('admin/drinks', { keyword, message })
+    }
+    res.render('admin/drinks', { drinks: searchDrinks, keyword })
   }
-
 }
 
 module.exports = adminController

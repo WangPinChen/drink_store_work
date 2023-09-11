@@ -24,7 +24,8 @@
     margin: 0 1rem 0 0;
   }
 
-  .drink-form button {
+  .drink-form button,
+  .delete-button {
     width: 200px;
   }
 
@@ -32,6 +33,10 @@
   .edit-button {
     color: black;
     background-color: #E9E5E2;
+  }
+
+  .edit-button {
+    position: relative;
   }
 
   .edit-button:hover {
@@ -44,10 +49,8 @@
   <main class="ms-2 me-2 border w-100">
     <form class="drink-form" action="/admin/drinks/{{drink._id}}?_method=PUT" method="POST">
       {{> admin-drink-form }}
-      <button type="submit" class="edit-button">儲存</button>
-      <form action="/admin/drinks/ /delete" method="post">
-        <button class="delete-button">刪除</button>
-      </form>
     </form>
   </main>
 </div>
+
+<script src="/javascripts/delete-confirm-single.js"></script>

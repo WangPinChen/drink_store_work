@@ -23,5 +23,9 @@
       <label class="d-block" for="note">備註 :</label>
       <textarea name="note" id="note" cols="90" rows="10" {{#if isViewOnly}}disabled{{/if}}>{{drink.note}}</textarea>
     </div>
+
+    <button {{#if isViewOnly}} {{else}}type="submit" {{/if}} class="edit-button">{{#if isViewOnly}}編輯 {{else}}儲存
+      {{/if}}</button>
+    <button class="delete-button" data-id="{{drink._id}}">刪除</button>
   </div>
 </div>

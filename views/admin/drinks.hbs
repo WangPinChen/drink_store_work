@@ -100,12 +100,12 @@
         新增
       </button>
 
-      <form class="search-form" action="" method="post" style="display: flex;">
-        <input class="search-input" type="text">
+      <form class="search-form" action="/admin/drinks/search" method="post" style="display: flex;">
+        <input class="search-input" type="text" name="keyword" value="{{keyword}}" required>
         <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
 
-      <div class="btn-group">
+      <div class="btn-group d-none">
         <button type="button" class="sort-button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-filter"></i>
         </button>
@@ -118,8 +118,12 @@
       </div>
     </div>
     <ul class="drinks-ul">
+      {{!-- 透過#each 渲染飲品資料 --}}
+      <h1>
+        {{message}}
+      </h1>
       {{#each drinks}}
-      <li class="d-flex w-100">
+      <li class="drinks-li d-flex w-100">
         <img src="https://i.imgur.com/EfBh0sM.png" alt="">
         <div class="drink-info">
           <span><a href="/admin/drinks/{{this._id}}">{{this.name}}</a></span>
@@ -128,42 +132,13 @@
         </div>
         <div class="drink-controller">
           <a href="/admin/drinks/{{this._id}}/edit">編輯</a>
-          <form action="/admin/drinks/{{this._id}}/delete" method="post">
-            <button type="submit">刪除</button>
+          <form class="form-{{this._id}}" action="/admin/drinks/{{this._id}}/delete?_method=DELETE" method="post">
+            <button data-id="{{this._id}}" class="delete-button" type="submit">刪除</button>
           </form>
         </div>
       </li>
       {{/each}}
-
-      <li class="d-flex w-100">
-        <img src="https://i.imgur.com/pV6uBUp.jpg" alt="">
-        <div class="drink-info">
-          <span>name</span>
-          <label for="">熱門商品</label>
-          <input type="checkbox" disabled>
-        </div>
-        <div class="drink-controller">
-          <a href="">編輯</a>
-          <form action="" method="post">
-            <button type="submit">刪除</button>
-          </form>
-        </div>
-      </li>
-      <li class="d-flex w-100">
-        <img src="https://i.imgur.com/pV6uBUp.jpg" alt="">
-        <div class="drink-info">
-          <span>name</span>
-          <label for="">熱門商品</label>
-          <input type="checkbox" disabled checked>
-        </div>
-        <div class="drink-controller">
-          <a href="">編輯</a>
-          <form action="" method="post">
-            <button type="submit">刪除</button>
-          </form>
-        </div>
-      </li>
-
+      {{!-- 渲染終點 --}}
     </ul>
   </main>
 </div>
@@ -193,3 +168,30 @@
     </div>
   </div>
 </div>
+
+<script>
+  const drinksgroup = document.querySelector('.drinks-ul')
+
+  function deleteDrink(event) {
+    const target = event.target
+
+    if ((target.matches('.delete-button'))) {
+      event.preventDefault()
+
+      swal({
+        title: "確定刪除資料?",
+        icon: "warning",
+        text: "刪除的資料將無法恢復",
+        buttons: true,
+        dangerMode: true
+      }).then(check => {
+        if (check) {
+          const id = target.dataset.id
+          document.querySelector(`.form-${id}`).submit()
+        }
+      })
+    }
+  }
+
+  drinksgroup.addEventListener('click', deleteDrink)
+</script>
