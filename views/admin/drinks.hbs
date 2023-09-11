@@ -35,7 +35,8 @@
 
   .drinks-ul img {
     width: 100px;
-    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
     padding: 0.5rem;
     border-radius: 15px;
   }
@@ -90,6 +91,63 @@
   .drink-controller button:hover {
     color: white;
   }
+
+  .img-update-container {
+    margin: 0 1rem;
+    width: 350px;
+    height: 350px;
+    position: relative;
+  }
+
+  .img-update-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/EfBh0sM.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: brightness(0.8);
+  }
+
+  .img-update-container .fa-camera {
+    text-shadow: 2px 2px 4px #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .img-update-container .fa-xmark {
+    text-shadow: 2px 2px 4px #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    display: none;
+  }
+
+
+  .img-update-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0.9;
+    /* 确保图像位于 ::before 之上 */
+  }
 </style>
 
 <div class="d-flex">
@@ -124,7 +182,7 @@
       </h1>
       {{#each drinks}}
       <li class="drinks-li d-flex w-100">
-        <img src="https://i.imgur.com/EfBh0sM.png" alt="">
+        <img src="{{#if this.image}} {{this.image}} {{else}} https://i.imgur.com/EfBh0sM.png {{/if}}" alt="">
         <div class="drink-info">
           <span><a href="/admin/drinks/{{this._id}}">{{this.name}}</a></span>
           <label for="">熱門商品</label>
@@ -150,7 +208,7 @@
         <h1 class="modal-title fs-5">新增</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/admin/drinks" method="post">
+      <form action="/admin/drinks" method="post" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="mb-4">
             <label for="name" class="me-2">飲料名稱 :</label>
@@ -160,6 +218,13 @@
             <label for="note" class="me-2">備　　註 :</label>
             <textarea nname="note" id="note" cols="40"></textarea>
           </div>
+        </div>
+        <div class="img-update-container">
+          <label for="image-update">
+            <i class="fa-solid fa-camera"></i>
+          </label>
+          <input class="d-none" name="image" type="file" id="image-update">
+          <i class="fa-solid fa-xmark"></i>
         </div>
         <div class="modal-footer">
           <button type="submit">儲存</button>
@@ -171,6 +236,9 @@
 
 <script>
   const drinksgroup = document.querySelector('.drinks-ul')
+  const imageUpdate = document.querySelector('#image-update')
+  const faXmark = document.querySelector('.fa-xmark')
+  const imgUdateContainer = document.querySelector('.img-update-container')
 
   function deleteDrink(event) {
     const target = event.target
@@ -194,4 +262,28 @@
   }
 
   drinksgroup.addEventListener('click', deleteDrink)
+
+  imageUpdate.addEventListener('change', () => {
+    const selectedFile = imageUpdate.files[0]
+
+    if (selectedFile) {
+      const img = document.createElement('img')
+      img.src = URL.createObjectURL(selectedFile)
+      img.style.cssText = `
+      width: 100%; 
+      `
+      faXmark.style.cssText = `
+      display:block
+      `
+      imgUdateContainer.appendChild(img)
+    }
+  })
+
+  faXmark.addEventListener('click', () => {
+    const img = document.querySelector('.img-update-container img')
+    img.remove()
+    faXmark.style.cssText = `
+    display:none
+    `
+  })
 </script>

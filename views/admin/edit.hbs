@@ -47,10 +47,43 @@
 <div class="d-flex">
   {{> admin-sidebar}}
   <main class="ms-2 me-2 border w-100">
-    <form class="drink-form" action="/admin/drinks/{{drink._id}}?_method=PUT" method="POST">
+    <form class="drink-form" action="/admin/drinks/{{drink._id}}?_method=PUT" method="POST"
+      enctype="multipart/form-data">
       {{> admin-drink-form }}
     </form>
   </main>
 </div>
 
 <script src="/javascripts/delete-confirm-single.js"></script>
+<script>
+  const imageUpdate = document.querySelector('#image-update')
+  const faXmark = document.querySelector('.img-container .fa-xmark')
+  const img = document.querySelector('.img-container img')
+
+  function changeImage(e) {
+    if (document.querySelector('.is-no-image')) {
+      document.querySelector('.is-no-image').remove()
+    }
+
+    const selectedFile = imageUpdate.files[0]
+    if (selectedFile) {
+      img.src = URL.createObjectURL(selectedFile)
+    }
+  }
+  function removeImage(e) {
+    if (document.querySelector('.is-no-image')) {
+      document.querySelector('.is-no-image').remove()
+    }
+    const imgContainer = document.querySelector('.img-container')
+    img.src = 'https://i.imgur.com/EfBh0sM.png'
+    const defaultInput = document.createElement('input')
+    defaultInput.className = "is-no-image"
+    defaultInput.name = "isNoImage"
+    defaultInput.style = "display:none;"
+    defaultInput.value = "Y"
+    imgContainer.appendChild(defaultInput)
+  }
+
+  imageUpdate.addEventListener('change', changeImage)
+  faXmark.addEventListener('click', removeImage)
+</script>

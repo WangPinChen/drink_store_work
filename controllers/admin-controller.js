@@ -1,4 +1,5 @@
 const Drink = require('../models/drink')
+const imgurFileHandler = require('../helpers/file-helpers')
 
 const adminController = {
   loginPage: (req, res) => {
@@ -21,10 +22,17 @@ const adminController = {
     res.render('admin/edit', { drink })
   },
   putDrink: async (req, res) => {
+    let imagePath = ''
+    if (req.file) {
+      imagePath = await imgurFileHandler(req.file)
+    }
+
     const drink = await Drink.findOne({ _id: req.params.id })
 
-    drink.name = req.body.name;
-    drink.note = req.body.note;
+    if (imagePath.length > 0) drink.image = imagePath
+    if (req.body.isNoImage === "Y") drink.image = ''
+    drink.name = req.body.name
+    drink.note = req.body.note
     drink.isPopular = req.body.isPopular ? true : false
     drink.isDelisted = req.body.isDelisted ? true : false
 
@@ -32,10 +40,14 @@ const adminController = {
     res.redirect(`/admin/drinks/${req.params.id}`)
   },
   postDrink: async (req, res) => {
+    const file = req.file
+    const filePath = await imgurFileHandler(file)
+
     await Drink.create({
       name: req.body.name,
       note: req.body.note,
-      createdBy: req.user._id
+      createdBy: req.user._id,
+      image: filePath
     })
     res.redirect('/admin/drinks')
   },

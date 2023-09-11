@@ -1,6 +1,50 @@
+<style>
+  .img-container {
+    height: auto;
+    position: relative;
+  }
+
+  .img-container img {
+    object-fit: cover;
+  }
+
+  .img-container .fa-camera {
+    text-shadow: 2px 2px 4px #000000;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .img-container .fa-xmark {
+    text-shadow: 2px 2px 4px #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+  }
+</style>
+
 <div class="drink-container d-flex mb-3">
   <div class="img-container">
     <img src="{{#if drink.image}} {{drink.image}} {{else}}https://i.imgur.com/EfBh0sM.png {{/if}}" alt="">
+    {{#if isViewOnly}}
+    {{else}}
+    <label for="image-update">
+      <i class="fa-solid fa-camera"></i>
+    </label>
+    <input class="d-none" name="image" type="file" id="image-update">
+    <i class="fa-solid fa-xmark"></i>
+    {{/if }}
   </div>
   <div class="text-container p-3">
     <div>
