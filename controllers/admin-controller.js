@@ -30,6 +30,15 @@ const adminController = {
 
     await drink.save()
     res.redirect(`/admin/drinks/${req.params.id}`)
+  },
+  postDrink: async (req, res) => {
+    console.log(req.user)
+    await Drink.create({
+      name: req.body.name,
+      note: req.body.note,
+      createdBy: req.user._id
+    })
+    res.redirect('/admin/drinks')
   }
 
 }

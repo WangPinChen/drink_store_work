@@ -3,6 +3,7 @@ const passport = require('passport')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
 
+router.post('/drinks', adminController.postDrink)
 router.get('/drinks/:id', adminController.getDrink)
 router.put('/drinks/:id', adminController.putDrink)
 router.get('/drinks/:id/edit', adminController.editDrinkPage)
