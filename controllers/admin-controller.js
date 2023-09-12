@@ -95,6 +95,18 @@ const adminController = {
     const stores = await Store.find().populate('cityId').lean()
     res.render('admin/stores', { stores, cities })
   },
+  postStore: async (req, res) => {
+    const createdBy = req.user._id
+    const { name, cityId, address, phone } = req.body
+    if (!name || !cityId || !address || !phone) {
+      req.flash('warning_msg', '所有欄位都要輸入')
+      res.redirect('back')
+    }
+
+    await Store.create({ name, cityId, address, phone, createdBy })
+    req.flash('success_msg', '新增成功!')
+    res.redirect('/admin/stores')
+  },
   putStore: async (req, res) => {
     const { name, cityId, address, phone } = req.body
     if (!name || !cityId || !address || !phone) {
@@ -115,6 +127,16 @@ const adminController = {
 
     await store.save()
     req.flash('success_msg', '編輯成功 !')
+    res.redirect('/admin/stores')
+  },
+  deleteStore: async (req, res) => {
+    const store = await Store.findOne({ _id: req.params.id })
+    if (!store) {
+      req.flash('warning_msg', '要刪除的門市不存在')
+      res.redirect('back')
+    }
+    await store.remove()
+    req.flash('success_msg', '刪除成功!')
     res.redirect('/admin/stores')
   }
 }

@@ -3,6 +3,10 @@
     padding: 0 1rem;
   }
 
+  .top-controller {
+    margin-top: 1rem;
+  }
+
   .create-button {
     border-radius: 15px;
   }
@@ -83,17 +87,49 @@
             <input name="phone" type="text" value="{{this.phone}}" disabled required>
             <button type="submit" class="edit-button" data-id="{{this._id}}">編輯</button>
           </form>
-          <form class="delete-form" action="">
-            <button class="delete-button" type="submit">刪除</button>
+          <form class="form-{{this._id}} delete-form" action="/admin/stores/{{this._id}}/delete?_method=DELETE"
+            method="post">
+            <button class="delete-button" type="submit" data-id="{{this._id}}">刪除</button>
           </form>
         </li>
         {{/each}}
 
-
-
       </ul>
     </div>
   </main>
+</div>
+
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">新增</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="m-2" action="/admin/stores" method="post">
+        <div class="mb-3">
+          <label for="name">門市名稱 :</label>
+          <input type="text" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="address">門市地址 :</label>
+          <select id="address" name="cityId">
+            {{#each cities}}
+            <option class="option" value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+          <input type="text" name="address">
+        </div>
+        <div class="mb-3">
+          <label for="phone">門市電話 :</label>
+          <input type="text" name="phone">
+        </div>
+        <div class="modal-footer">
+          <button type="submit">儲存</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -127,7 +163,27 @@
       e.target.textContent = '儲存'
     }
   }
+  function deleteStore(e) {
+    if (e.target.matches('.delete-button')) {
+
+      e.preventDefault()
+      swal({
+        title: "確定刪除資料?",
+        icon: "warning",
+        text: "刪除的資料將無法恢復",
+        buttons: true,
+        dangerMode: true
+      }).then(check => {
+        if (check) {
+          const id = e.target.dataset.id
+          document.querySelector(`.form-${id}`).submit()
+        }
+      })
+
+    }
+  }
 
   storesUl.addEventListener('click', toggleEdit)
+  storesUl.addEventListener('click', deleteStore)
 
 </script>
