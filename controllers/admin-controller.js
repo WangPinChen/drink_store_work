@@ -1,7 +1,12 @@
+//models
 const Drink = require('../models/drink')
 const Store = require('../models/store')
 const City = require('../models/city')
+const User = require('../models/user')
+//helpers
 const imgurFileHandler = require('../helpers/file-helpers')
+//套件
+const bcrypt = require('bcryptjs')
 
 const adminController = {
   loginPage: (req, res) => {
@@ -138,6 +143,36 @@ const adminController = {
     await store.remove()
     req.flash('success_msg', '刪除成功!')
     res.redirect('/admin/stores')
+  },
+  getUsersPage: async (req, res) => {
+    const users = await User.find().lean()
+    res.render('admin/users', { users })
+  },
+  postUser: async (req, res) => {
+    const { account, password, passwordCheck } = req.body
+    if (!account || !password || !passwordCheck) {
+      req.flash('warning_msg', '所有欄位皆為必填。')
+      return res.redirect('back')
+    }
+    if (password !== passwordCheck) {
+      req.flash('warning_msg', '密碼與確認密碼不相符。')
+      return res.redirect('back')
+    }
+    if (req.user.account !== 'admin') {
+      req.flash('warning_msg', '只有管理者(admin)才可進行帳號新增')
+      return res.redirect('back')
+    }
+
+    const user = await User.find({ account })
+    if (user.length > 0) {
+      req.flash('warning_msg', '該帳號已被使用')
+      return res.redirect('back')
+    }
+    console.log(`----------${account}--------------`)
+    const hash = await bcrypt.hash(password, 10)
+    await User.create({ account, password: hash })
+    res.redirect('/admin/users')
+
   }
 }
 

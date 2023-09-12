@@ -1,0 +1,112 @@
+<style>
+  main {
+    padding: 0 1rem;
+  }
+
+  .top-controller {
+    margin-top: 1rem;
+  }
+
+  .create-button {
+    border-radius: 15px;
+  }
+
+  .users-group {
+    margin: 1rem 0;
+  }
+
+  .users-group ul {
+    margin: 0;
+  }
+
+  .user-list {
+    width: 100%;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(197, 192, 192);
+  }
+
+  .user-list .user-account {
+    margin: 0;
+  }
+
+  .user-list .controller {
+    display: flex;
+  }
+
+  .user-list button {
+    height: 60px;
+    width: 100px;
+    background-color: #E9E5E2;
+    color: black;
+  }
+
+  .user-list .edit-button:hover {
+    background-color: gray;
+    color: white;
+  }
+
+  .user-list .delete-button:hover {
+    color: white;
+  }
+</style>
+
+<div class="d-flex">
+  {{> admin-sidebar isUsersPage="Y"}}
+  <main class="ms-2 me-2 border w-100">
+    <div class="top-controller">
+      <button class="create-button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#create-modal">
+        新增
+      </button>
+    </div>
+
+    <div class="users-group">
+      <div>
+        <h1>使用者列表</h1>
+      </div>
+      <ul>
+        {{#each users}}
+        <li class="user-list">
+          <p class="user-account">{{this.account}}</p>
+          <div class="controller">
+            <button class="edit-button">修改密碼</button>
+            <form class="delete-form" action="" method="post">
+              <button class="delete-button">刪除</button>
+            </form>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </main>
+</div>
+
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">新增</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="m-2" action="/admin/users" method="post">
+        <div class="mb-4">
+          <label for="">帳號:</label>
+          <input name="account" type="text">
+        </div>
+        <div class="mb-4">
+          <label for="">密碼:</label>
+          <input name="password" type="password">
+        </div>
+        <div class="mb-4">
+          <label for="">確認密碼:</label>
+          <input name="passwordCheck" type="password">
+        </div>
+        <div class="modal-footer">
+          <button type="submit">儲存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
