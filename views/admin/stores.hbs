@@ -1,0 +1,110 @@
+<style>
+  main {
+    padding: 0 1rem;
+  }
+
+  .create-button {
+    border-radius: 15px;
+  }
+
+  .title-ul {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+  }
+
+  .title-ul li {
+    height: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    background-color: #E9E5E2;
+  }
+
+  .stores-ul {
+    margin: 1rem 0;
+  }
+
+  .stores-ul li {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    margin-bottom: 1rem;
+  }
+
+  .stores-ul li .edit-form {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 2fr 1fr 3fr 2fr 1fr;
+  }
+
+  .stores-ul .edit-button,
+  .stores-ul .delete-button {
+    color: black;
+    background-color: #E9E5E2;
+  }
+
+  .stores-ul .edit-button:hover {
+    color: white;
+    background-color: gray;
+  }
+
+  .stores-ul .delete-button:hover {
+    color: white;
+    background: rgb(214, 55, 55)
+  }
+</style>
+
+<div class="d-flex">
+  {{> admin-sidebar isStoresPage="Y"}}
+  <main class="ms-2 me-2 border w-100">
+    <div class="top-controller">
+      <button class="create-button" style="width:150px;" data-bs-toggle="modal" data-bs-target="#create-modal">
+        新增
+      </button>
+    </div>
+    <div class="stores-group">
+      <ul class="title-ul">
+        <li>門市名稱</li>
+        <li>門市地址</li>
+        <li>門市電話</li>
+        <li>編輯/刪除</li>
+      </ul>
+      <ul class="stores-ul">
+        <li>
+          <form class="edit-form" action="" method="post">
+            <input name="name" type="text" value="test-content">
+            <select id="dropdown" name="dropdown">
+              <option value="option1">选项1</option>
+              <option value="option2">选项2</option>
+              <option value="option3">选项3</option>
+              <option value="option4">选项4</option>
+            </select>
+            <input name="address" type="text" value="test-content" "test-contenttest-contenttest-content">
+            <input name="phone" type="text" value="test-content">
+            <button type="submit" class="edit-button">編輯</button>
+          </form>
+          <form class="delete-form" action="">
+            <button class="delete-button" type="submit">刪除</button>
+          </form>
+        </li>
+
+        <li>
+          <form class="edit-form" action="" method="post">
+            <input name="name" type="text" value="test-content">
+            <select id="dropdown" name="dropdown">
+              <option value="option1">选项1</option>
+              <option value="option2">选项2</option>
+              <option value="option3">选项3</option>
+              <option value="option4">选项4</option>
+            </select>
+            <input name="address" type="text" value="test-content" "test-contenttest-contenttest-content">
+            <input name="phone" type="text" value="test-content">
+            <button type="submit" class="edit-button">編輯</button>
+          </form>
+          <form class="delete-form" action="">
+            <button class="delete-button" type="submit">刪除</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>

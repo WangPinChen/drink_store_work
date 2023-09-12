@@ -29,13 +29,28 @@
 <div class="side-bar d-flex flex-column justify-content-between border" style="width: 15%;height:100vh;">
   <ul class="list-group list-group-flush">
     <a href="/admin/drinks">
-      <li class="side-bar-list list-group-item">飲料清單</li>
+      <li class="side-bar-list list-group-item">
+        {{#if isDrinksPage}}
+        <i class="fa-solid fa-angles-right"></i>
+        {{/if}}
+        飲料清單
+      </li>
     </a>
-    <a href="">
-      <li class="side-bar-list list-group-item">門市清單</li>
+    <a href="/admin/stores">
+      <li class="side-bar-list list-group-item">
+        {{#if isStoresPage}}
+        <i class="fa-solid fa-angles-right"></i>
+        {{/if}}
+        門市清單
+      </li>
     </a>
-    <a href="">
-      <li class="side-bar-list list-group-item">帳號管理</li>
+    <a href="/admin/accounts">
+      <li class="side-bar-list list-group-item">
+        {{#if isAccountsPage}}
+        <i class="fa-solid fa-angles-right"></i>
+        {{/if}}
+        帳號管理
+      </li>
     </a>
   </ul>
   <form action="/admin/logout" method="post">

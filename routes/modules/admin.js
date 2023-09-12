@@ -16,4 +16,6 @@ router.post('/logout', adminController.logout)
 router.post('/drinks', upload.single('image'), adminController.postDrink)
 router.get('/drinks', adminController.getDrinks)
 
+router.get('/stores', adminController.getStoresPage)
+
 module.exports = router

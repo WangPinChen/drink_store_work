@@ -87,6 +87,9 @@ const adminController = {
       return res.render('admin/drinks', { keyword, message })
     }
     res.render('admin/drinks', { drinks: searchDrinks, keyword })
+  },
+  getStoresPage: async (req, res) => {
+    res.render('admin/stores')
   }
 }
 
