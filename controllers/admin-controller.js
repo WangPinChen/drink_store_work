@@ -9,6 +9,11 @@ const adminController = {
   login: (req, res) => {
     res.redirect('/admin/drinks')
   },
+  logout: (req, res) => {
+    req.logout()
+    req.flash('success_msg', '登出成功。')
+    res.redirect('/admin/login')
+  },
   getDrinks: async (req, res) => {
     const drinks = await Drink.find().lean().sort({ name: 'asc' })
     res.render('admin/drinks', { drinks })
@@ -23,7 +28,7 @@ const adminController = {
   },
   putDrink: async (req, res) => {
     if (req.body.name === '') {
-      console.log('名稱不可空白')
+      req.flash('warning_msg', '名稱必須輸入')
       res.redirect('back')
     }
     let imagePath = ''
@@ -41,11 +46,12 @@ const adminController = {
     drink.isDelisted = req.body.isDelisted ? true : false
 
     await drink.save()
+    req.flash('success_msg', '修改成功!')
     res.redirect(`/admin/drinks/${req.params.id}`)
   },
   postDrink: async (req, res) => {
     if (req.body.name === '') {
-      console.log('名稱不可空白')
+      req.flash('warning_msg', '名稱必須輸入')
       return res.redirect('/admin/drinks')
     }
     const file = req.file
@@ -57,6 +63,7 @@ const adminController = {
       createdBy: req.user._id,
       image: filePath
     })
+    req.flash('success_msg', '新增成功!')
     res.redirect('/admin/drinks')
   },
   deleteDrink: async (req, res) => {

@@ -12,6 +12,7 @@ router.put('/drinks/:id', upload.single('image'), adminController.putDrink)
 router.get('/login', adminController.loginPage)
 // router.post('/login', passport.authenticate('local', { failureRedirect: '/admin/login', failureFlash: true }), adminController.login)
 router.post('/login', passport.authenticate('local', { failureRedirect: '/admin/login' }), adminController.login)
+router.post('/logout', adminController.logout)
 router.post('/drinks', upload.single('image'), adminController.postDrink)
 router.get('/drinks', adminController.getDrinks)
 

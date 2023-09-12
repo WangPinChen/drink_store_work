@@ -1,0 +1,84 @@
+<style>
+  .alert {
+    border: 1px solid #a6a4a2;
+    margin: 2rem 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 5%;
+    left: 50%;
+    opacity: 1;
+    /* 初始透明度为1，即完全不透明 */
+    transition: opacity 2s ease;
+    /* 添加渐变效果，2秒内过渡，使用"ease"作为过渡函数 */
+    z-index: 1;
+  }
+
+  .alert:hover {
+    border: 1px solid rgb(48, 46, 46);
+  }
+
+  .message-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .alert .fa-circle-check {
+    font-size: 1.75rem;
+    color: green;
+    margin-right: 0.5rem;
+  }
+
+  .alert .fa-triangle-exclamation {
+    font-size: 1.75rem;
+    color: orange;
+    margin-right: 0.5rem;
+  }
+
+  .alert button {
+    font-size: 1.25rem;
+    width: 5%;
+    background-color: white;
+    color: black;
+  }
+
+  .alert button:hover {
+    background-color: white;
+  }
+</style>
+{{#if success_msg}}
+<div class="alert alert-success alert-dismissible" role="alert">
+  <div class="message-content">
+    <i class="fa-regular fa-circle-check"></i>
+    <div>{{success_msg}} </div>
+  </div>
+  <button type="button" class="" data-bs-dismiss="alert" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+{{/if}}
+
+{{#if warning_msg}}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <div class="message-content">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>{{warning_msg}} </div>
+  </div>
+  <button type="button" class="" data-bs-dismiss="alert" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+{{/if}}
+
+
+<script>
+  const alertSuccess = document.querySelector('.alert-success')
+  setTimeout(() => {
+    alertSuccess.style.opacity = "0"
+  }, 3500)
+</script>
