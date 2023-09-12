@@ -1,4 +1,6 @@
 const Drink = require('../models/drink')
+const Store = require('../models/store')
+const City = require('../models/city')
 const imgurFileHandler = require('../helpers/file-helpers')
 
 const adminController = {
@@ -89,7 +91,12 @@ const adminController = {
     res.render('admin/drinks', { drinks: searchDrinks, keyword })
   },
   getStoresPage: async (req, res) => {
-    res.render('admin/stores')
+    const cities = await City.find().lean()
+    const stores = await Store.find().populate('cityId').lean()
+    console.log(stores)
+
+
+    res.render('admin/stores', { stores, cities })
   }
 }
 

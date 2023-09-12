@@ -69,42 +69,65 @@
         <li>編輯/刪除</li>
       </ul>
       <ul class="stores-ul">
-        <li>
-          <form class="edit-form" action="" method="post">
-            <input name="name" type="text" value="test-content">
-            <select id="dropdown" name="dropdown">
-              <option value="option1">选项1</option>
-              <option value="option2">选项2</option>
-              <option value="option3">选项3</option>
-              <option value="option4">选项4</option>
-            </select>
-            <input name="address" type="text" value="test-content" "test-contenttest-contenttest-content">
-            <input name="phone" type="text" value="test-content">
-            <button type="submit" class="edit-button">編輯</button>
-          </form>
-          <form class="delete-form" action="">
-            <button class="delete-button" type="submit">刪除</button>
-          </form>
-        </li>
 
-        <li>
+        {{#each stores}}
+        <li data-id="{{this._id}}">
           <form class="edit-form" action="" method="post">
-            <input name="name" type="text" value="test-content">
-            <select id="dropdown" name="dropdown">
-              <option value="option1">选项1</option>
-              <option value="option2">选项2</option>
-              <option value="option3">选项3</option>
-              <option value="option4">选项4</option>
+            <input name="name" type="text" value="{{this.name}}" disabled>
+            <select class="city-select" id="dropdown" name="dropdown" data-id="{{this.cityId._id}}" disabled>
+              {{#each ../cities}}
+              <option class="city-option" value="{{this._id}}">{{this.name}}</option>
+              {{/each}}
             </select>
-            <input name="address" type="text" value="test-content" "test-contenttest-contenttest-content">
-            <input name="phone" type="text" value="test-content">
-            <button type="submit" class="edit-button">編輯</button>
+            <input name="address" type="text" value="{{this.address}}" disabled>
+            <input name="phone" type="text" value="{{this.phone}}" disabled>
+            <button type="submit" class="edit-button" data-id="{{this._id}}">編輯</button>
           </form>
           <form class="delete-form" action="">
             <button class="delete-button" type="submit">刪除</button>
           </form>
         </li>
+        {{/each}}
+
+
+
       </ul>
     </div>
   </main>
 </div>
+
+<script>
+  const citySeletc = document.querySelectorAll('.city-select')
+  const storesUl = document.querySelector('.stores-ul')
+
+  citySeletc.forEach(select => {
+    const options = select.querySelectorAll('option')
+    options.forEach(option => {
+      if (option.value === select.dataset.id) {
+        option.selected = true
+      }
+    })
+  })
+
+  function toggleEdit(e) {
+    if (e.target.textContent === "編輯") {
+      //取消表單傳送
+      e.preventDefault()
+      //將已經改變成可編輯狀態的<li>回歸成不可編輯狀態
+      storesUl.querySelectorAll('input').forEach(input => input.disabled = true)
+      storesUl.querySelectorAll('select').forEach(select => select.disabled = true)
+      storesUl.querySelectorAll('.edit-button').forEach(button => button.textContent = '編輯')
+
+      //將已選取的<li>標籤進行轉換成可編輯狀態
+      const li = document.querySelector(`[data-id="${e.target.dataset.id}"]`)
+      const formInputs = li.querySelectorAll('input')
+      const formSelect = li.querySelector('select')
+      formSelect.disabled = false
+      formInputs.forEach(input => input.disabled = false)
+      e.target.textContent = '儲存'
+    }
+  }
+
+  storesUl.addEventListener('click', toggleEdit)
+
+</script>

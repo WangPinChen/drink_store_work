@@ -30,7 +30,7 @@ input:hover {
 
 input:focus {
   outline: none;
-  border-bottom: 1px solid brown;
+  border-bottom: 3px solid brown;
 }
 
 textarea {
@@ -44,5 +44,17 @@ textarea:hover {
 
 textarea:focus {
   outline: none;
+  border: 3px solid brown;
+}
+
+select {
+  border: 1px solid rgb(181, 178, 178);
+}
+
+select:hover {
   border: 1px solid brown;
+}
+
+select:focus {
+  border: 3px solid brown;
 }
