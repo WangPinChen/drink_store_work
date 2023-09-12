@@ -6,6 +6,7 @@ const upload = require('../../middleware/multer')
 
 router.get('/drinks/:id/edit', adminController.editDrinkPage)
 router.delete('/drinks/:id/delete', adminController.deleteDrink)
+router.put('/stores/:id/edit', adminController.putStore)
 router.post('/drinks/search', adminController.searchDrink)
 router.get('/drinks/:id', adminController.getDrink)
 router.put('/drinks/:id', upload.single('image'), adminController.putDrink)

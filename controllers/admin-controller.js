@@ -93,10 +93,29 @@ const adminController = {
   getStoresPage: async (req, res) => {
     const cities = await City.find().lean()
     const stores = await Store.find().populate('cityId').lean()
-    console.log(stores)
-
-
     res.render('admin/stores', { stores, cities })
+  },
+  putStore: async (req, res) => {
+    const { name, cityId, address, phone } = req.body
+    if (!name || !cityId || !address || !phone) {
+      req.flash('warning_msg', '所有欄位皆為必填')
+      return res.redirect('back')
+    }
+
+    const store = await Store.findOne({ _id: req.params.id })
+    if (!store) {
+      req.flash('warning_msg', '要修改的門市不存在')
+      return res.redirect('back')
+    }
+
+    store.name = req.body.name
+    store.cityId = req.body.cityId
+    store.address = req.body.address
+    store.phone = req.body.phone
+
+    await store.save()
+    req.flash('success_msg', '編輯成功 !')
+    res.redirect('/admin/stores')
   }
 }
 

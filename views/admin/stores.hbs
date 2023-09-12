@@ -72,15 +72,15 @@
 
         {{#each stores}}
         <li data-id="{{this._id}}">
-          <form class="edit-form" action="" method="post">
-            <input name="name" type="text" value="{{this.name}}" disabled>
-            <select class="city-select" id="dropdown" name="dropdown" data-id="{{this.cityId._id}}" disabled>
+          <form class="edit-form" action="/admin/stores/{{this._id}}/edit?_method=PUT" method="post">
+            <input name="name" type="text" value="{{this.name}}" disabled required>
+            <select class="city-select" id="dropdown" name="cityId" data-id="{{this.cityId._id}}" disabled>
               {{#each ../cities}}
               <option class="city-option" value="{{this._id}}">{{this.name}}</option>
               {{/each}}
             </select>
-            <input name="address" type="text" value="{{this.address}}" disabled>
-            <input name="phone" type="text" value="{{this.phone}}" disabled>
+            <input name="address" type="text" value="{{this.address}}" disabled required>
+            <input name="phone" type="text" value="{{this.phone}}" disabled required>
             <button type="submit" class="edit-button" data-id="{{this._id}}">編輯</button>
           </form>
           <form class="delete-form" action="">
