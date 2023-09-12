@@ -22,6 +22,10 @@ const adminController = {
     res.render('admin/edit', { drink })
   },
   putDrink: async (req, res) => {
+    if (req.body.name === '') {
+      console.log('名稱不可空白')
+      res.redirect('back')
+    }
     let imagePath = ''
     if (req.file) {
       imagePath = await imgurFileHandler(req.file)
@@ -40,6 +44,10 @@ const adminController = {
     res.redirect(`/admin/drinks/${req.params.id}`)
   },
   postDrink: async (req, res) => {
+    if (req.body.name === '') {
+      console.log('名稱不可空白')
+      return res.redirect('/admin/drinks')
+    }
     const file = req.file
     const filePath = await imgurFileHandler(file)
 
