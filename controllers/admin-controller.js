@@ -168,11 +168,53 @@ const adminController = {
       req.flash('warning_msg', '該帳號已被使用')
       return res.redirect('back')
     }
-    console.log(`----------${account}--------------`)
     const hash = await bcrypt.hash(password, 10)
     await User.create({ account, password: hash })
     res.redirect('/admin/users')
 
+  },
+  deleteUser: async (req, res) => {
+    if (req.user.account !== 'admin') {
+      req.flash('warning_msg', '只有管理者才可刪除帳號')
+      return res.redirect('back')
+    }
+
+    const user = await User.findOne({ _id: req.params.id })
+    if (!user) {
+      req.flash('warning_msg', '要刪除的帳號不存在')
+      return res.redirect('back')
+    }
+
+    if (user.account === 'admin') {
+      req.flash('warning_msg', '無法刪除帳號:admin')
+      return res.redirect('back')
+    }
+
+    await user.remove()
+    req.flash('success_msg', '帳號已經成功刪除')
+    return res.redirect('back')
+  },
+  putUser: async (req, res) => {
+    const { password, passwordCheck } = req.body
+    if (password !== passwordCheck) {
+      req.flash('warning_msg', '密碼與確認密碼不相符')
+      return res.redirect('back')
+    }
+    const user = await User.findOne({ _id: req.params.id })
+    if (!user) {
+      req.flash('warning_msg', '使用者不存在')
+      return res.redirect('back')
+    }
+    if (req.user.account !== 'admin' && user._id.toString() !== req.user._id.toString()) {
+      req.flash('warning_msg', '一般使用者不可修改其他使用者密碼')
+      return res.redirect('back')
+    }
+
+    const newPassword = await bcrypt.hash(password, 10)
+    user.password = newPassword
+    await user.save()
+    req.flash('success_msg', '密碼變更成功')
+    return res.redirect('back')
   }
 }
 

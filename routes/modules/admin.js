@@ -8,6 +8,8 @@ router.get('/drinks/:id/edit', adminController.editDrinkPage)
 router.delete('/drinks/:id/delete', adminController.deleteDrink)
 router.put('/stores/:id/edit', adminController.putStore)
 router.delete('/stores/:id/delete', adminController.deleteStore)
+router.put('/users/:id/edit', adminController.putUser)
+router.delete('/users/:id/delete', adminController.deleteUser)
 router.post('/drinks/search', adminController.searchDrink)
 router.get('/drinks/:id', adminController.getDrink)
 router.put('/drinks/:id', upload.single('image'), adminController.putDrink)
@@ -21,5 +23,6 @@ router.get('/drinks', adminController.getDrinks)
 router.get('/stores', adminController.getStoresPage)
 router.get('/users', adminController.getUsersPage)
 router.post('/users', adminController.postUser)
+
 
 module.exports = router

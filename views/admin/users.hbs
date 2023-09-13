@@ -66,13 +66,14 @@
       <div>
         <h1>使用者列表</h1>
       </div>
-      <ul>
+      <ul class="users-ul">
         {{#each users}}
         <li class="user-list">
           <p class="user-account">{{this.account}}</p>
           <div class="controller">
-            <button class="edit-button">修改密碼</button>
-            <form class="delete-form" action="" method="post">
+            <button class="edit-button" data-bs-toggle="modal" data-bs-target="#edit-modal"
+              data-id="{{this._id}}">修改密碼</button>
+            <form class="delete-form" action="/admin/users/{{this._id}}/delete?_method=DELETE" method="post">
               <button class="delete-button">刪除</button>
             </form>
           </div>
@@ -110,3 +111,80 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="edit-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">新增</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="edit-form m-2" action="/admin/users" method="post">
+        <div class="mb-4">
+          <label for="">密碼:</label>
+          <input name="password" type="password">
+        </div>
+        <div class="mb-4">
+          <label for="">確認密碼:</label>
+          <input name="passwordCheck" type="password">
+        </div>
+        <div class="modal-footer">
+          <button type="submit">儲存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const usersUl = document.querySelector('.users-group')
+  function setAction(e) {
+    if (e.target.className === 'edit-button') {
+      document.querySelector('.edit-form').action = `/admin/users/${e.target.dataset.id}/edit?_method=PUT`
+    }
+  }
+
+  usersUl.addEventListener('click', setAction)
+</script>
+
+<script>
+  const getUser = async () => {
+    try {
+      const response = await fetch('/api/user')
+      const user = await response.json()
+      return user
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
+  (async () => {
+    const user = await getUser()
+    console.log(user)
+
+    function showReject(e) {
+      if (
+        e.target.className === 'edit-button'
+        && user.account !== 'admin'
+        && e.target.dataset.id !== user._id
+      ) {
+        e.target.style.cursor = 'not-allowed'
+        e.target.style.backgroundColor = 'rgb(214, 55, 55)'
+        e.target.dataset.bsToggle = ''
+        e.target.textContent = '不可修改'
+      }
+    }
+    function removeRejectCSS(e) {
+      if (
+        e.target.className === 'edit-button'
+        && user.account !== 'admin'
+        && e.target.dataset.id !== user._id
+      ) {
+        e.target.style.backgroundColor = '#E9E5E2'
+        e.target.textContent = '修改密碼'
+      }
+    }
+    usersUl.addEventListener('mouseover', showReject)
+    usersUl.addEventListener('mouseout', removeRejectCSS)
+  })()
+
+</script>
