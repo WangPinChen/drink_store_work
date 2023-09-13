@@ -135,7 +135,7 @@
     </div>
   </div>
 </div>
-
+{{!-- 處理使用者產生自己的modal form --}}
 <script>
   const usersUl = document.querySelector('.users-group')
   function setAction(e) {
@@ -146,7 +146,7 @@
 
   usersUl.addEventListener('click', setAction)
 </script>
-
+{{!-- 處裡一般使用者不可變動其他使用者密碼 --}}
 <script>
   const getUser = async () => {
     try {
@@ -159,7 +159,6 @@
   }
   (async () => {
     const user = await getUser()
-    console.log(user)
 
     function showReject(e) {
       if (
