@@ -1,0 +1,156 @@
+<style>
+  main {
+    height: auto;
+  }
+
+  .banner {
+    width: 100%;
+    display: flex;
+  }
+
+  .text-content {
+    width: 50%;
+    padding: 3rem;
+    border-right: 2rem solid brown;
+  }
+
+  .text-content .banner-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: brown;
+    margin: 1rem 0;
+  }
+
+  .text-content .banner-title-en {
+    letter-spacing: 3px;
+    color: gray;
+  }
+
+  .banner img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .city-choice-content {
+    width: 75%;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .city-choice-content P {
+    width: 75px;
+    margin: 0;
+    padding: 0 0.5rem;
+    background-color: brown;
+    color: white;
+    text-align: center;
+  }
+
+  .city-choice-content select {
+    width: 20%;
+
+  }
+
+  .stores-group {
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .store {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    border-bottom: 2px solid gray;
+  }
+
+  .store:hover {
+    border-bottom: 2px solid brown;
+  }
+
+  .store p {
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .store .name {
+    width: 25%;
+  }
+
+  .store .address {
+    width: 50%;
+  }
+</style>
+
+
+{{> nav-bar}}
+<main>
+  <div class="banner">
+    <div class="text-content">
+      <p class="banner-title">門市據點</p>
+      <p class="banner-title-en">
+        <i class="fa-solid fa-shop"></i>
+        Shop List
+      </p>
+    </div>
+    <img src="/images/stores-banner.jpg" alt="">
+  </div>
+
+  <div class="city-choice-content">
+    <p>地區:</p>
+    <select>
+      <option value="all">全部</option>
+      {{#each cities}}
+      <option value="{{this._id}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="stores-group">
+    {{#each stores}}
+    <div class="store" data-id="{{this.cityId._id}}">
+      <p class="name">{{this.name}}</p>
+      <p class="address">{{this.fullAddress}}</p>
+      <p class="number">{{this.phone}}</p>
+    </div>
+    {{/each}}
+
+  </div>
+
+</main>
+{{> footer}}
+
+
+<script>
+
+  const stores = document.querySelectorAll('.store')
+  const citySelect = document.querySelector('.city-choice-content select')
+
+
+
+
+  function selectCity() {
+    if (citySelect.value === 'all') {
+      return stores.forEach(store => {
+        store.style.display = 'flex'
+      })
+    }
+
+    stores.forEach(store => {
+      store.style.display = 'flex'
+      if (store.dataset.id !== citySelect.value) {
+        store.style.display = 'none'
+      }
+    })
+
+    console.log(citySelect.value)
+  }
+
+  citySelect.addEventListener('change', selectCity)
+</script>

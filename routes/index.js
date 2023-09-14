@@ -8,6 +8,7 @@ const fontEndController = require('../controllers/font-end-controller')
 router.use('/api', api)
 router.use('/admin', admin)
 
+router.get('/stores', fontEndController.getDrinksPage)
 router.get('/', fontEndController.getHomePage)
 
 module.exports = router
