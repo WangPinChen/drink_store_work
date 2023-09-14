@@ -1,0 +1,75 @@
+<style>
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
+    height: 55px;
+    z-index: 1;
+  }
+
+  .logo-content a {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-content .logo-img {
+    max-width: 55px;
+    height: 55px;
+  }
+
+  .logo-content p {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+
+  .nav-ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+  }
+
+  .nav-ul a {
+
+    height: 100%;
+  }
+
+  .nav-ul a:hover {
+    background-color: brown;
+  }
+
+  .nav-ul li {
+    min-width: 140px;
+    padding: 0 1rem;
+    margin: 0 1rem;
+    font-size: 1.25rem;
+    height: 100%;
+    line-height: 55px;
+  }
+
+  .nav-ul li:hover {
+    color: white;
+  }
+</style>
+
+<nav class="nav-bar">
+  <div class="logo-content">
+    <a href="/">
+      <img class="logo-img" src="/images/logo.png" alt="">
+      <p>幻迷饗</p>
+    </a>
+  </div>
+  <ul class="nav-ul">
+    <a href="">
+      <li class="nav-li">門市資訊</li>
+    </a>
+    <a href="">
+      <li class="nav-li">飲品清單</li>
+    </a>
+    <a href="">
+      <li class="nav-li">關於我們</li>
+    </a>
+  </ul>
+</nav>

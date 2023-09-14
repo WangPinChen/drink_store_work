@@ -1,1 +1,224 @@
-<h1>Home Page</h1>
+<style>
+  main {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+  }
+
+  .slide .slide-background {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    filter: blur(2rem);
+    z-index: -1;
+  }
+
+  .slideshow-container .slide-img {
+    width: 1200px;
+    height: 480px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .prev,
+  .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .prev {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .top-drinks {
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .top-drinks-title,
+  .brand-story-title {
+    margin: 1rem 0;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 1px;
+    background-color: brown;
+    background: linear-gradient(to right, brown, rgba(255, 255, 255, 1));
+  }
+
+  .drinks {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .drinks .drink {
+    width: 30%;
+  }
+
+  .drinks img {
+    width: 100%;
+    aspect-ratio: 1/1.5;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .drink {
+    margin-bottom: 0.5rem;
+  }
+
+  .drink .drink-name {
+    color: brown;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+  }
+
+  .brand-story-title {
+    text-align: right;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), brown);
+  }
+
+  .brand-story {
+    margin: 1rem 0;
+  }
+
+  .brand-story-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .brand-story-content img {
+    width: 35%;
+    max-width: 450px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .brand-story-content .desc {
+    margin: 0 1rem;
+    font-size: 1.25rem;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .brand-story-content img {
+      width: 50%;
+    }
+
+    .brand-story-content .desc {
+      font-size: 1.5rem;
+      line-height: 75px;
+    }
+  }
+</style>
+{{> nav-bar}}
+<main>
+  {{!-- slideshow --}}
+  <div class="slideshow-container">
+    <div class="slide">
+      <img class="slide-img" src="/images/slideshow-img1.jpg" alt="Image 1">
+      <img class="slide-background" src="/images/slideshow-img1.jpg" alt="">
+    </div>
+    <div class="slide">
+      <img src="/images/slideshow-img2.jpg" alt="Image 2">
+      <img class="slide-background" src="/images/slideshow-img2.jpg" alt="">
+    </div>
+    <div class="slide">
+      <img src="/images/slideshow-img3.jpg" alt="Image 3">
+      <img class="slide-background" src="/images/slideshow-img3.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- 下一張和上一張按鈕 -->
+  {{!-- <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a> --}}
+
+
+  {{!-- top-drinks --}}
+  <div class="top-drinks">
+    <p class="top-drinks-title">熱門飲品</p>
+    <div class="drinks">
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+      <div class="drink">
+        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
+        <p class="drink-name">飲料名稱</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-story">
+    <p class="brand-story-title">
+      品牌故事
+    </p>
+    <div class="brand-story-content">
+      <img src="/images/brand-story-img.jpg" alt="">
+      <p class="desc">
+        　　
+        探索奇幻之味，品味「幻迷饗」的獨特精髓。我們帶您進入一場無比美味的奇幻旅程，每一口都是驚喜的起點。濃郁的棕紅色調，宛如魔法的畫筆，將您的味蕾帶入一個迷人的異世界。在這個充滿魔法和驚奇的饗宴中，您將品味到前所未有的口感和風味，這是「幻迷饗」的獨特魅力所在。我們不僅提供飲品，更是一場奇幻之旅的引領者，讓您的每一刻都充滿美好的體驗。歡迎您加入我們，一同探索幻想的味道，享受真正的飲品饗宴。
+      </p>
+    </div>
+  </div>
+</main>
+{{> footer}}
+
+<script>
+  var slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    var slides = document.getElementsByClassName("slide");
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 5000); // 切換圖片的時間間隔（2秒）
+  }
+</script>
