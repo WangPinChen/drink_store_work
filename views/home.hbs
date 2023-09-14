@@ -54,8 +54,8 @@
   }
 
   .top-drinks {
-    margin: 1rem 0;
-    width: 100%;
+    margin: 1rem auto;
+    width: 80%;
   }
 
   .top-drinks-title,
@@ -104,7 +104,8 @@
   }
 
   .brand-story {
-    margin: 1rem 0;
+    width: 80%;
+    margin: 1rem auto;
   }
 
   .brand-story-content {
@@ -163,30 +164,18 @@
   <div class="top-drinks">
     <p class="top-drinks-title">熱門飲品</p>
     <div class="drinks">
+      {{#each topDrinks}}
       <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
+        <img src="
+        {{#if this.image}}
+          {{this.image}}
+        {{else}}
+          https://i.imgur.com/EfBh0sM.png
+        {{/if}}
+        " alt="">
+        <p class="drink-name">{{this.name}}</p>
       </div>
-      <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
-      </div>
-      <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
-      </div>
-      <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
-      </div>
-      <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
-      </div>
-      <div class="drink">
-        <img src="https://i.imgur.com/pV6uBUp_d.jpg?maxwidth=520&shape=thumb&fidelity=high" alt="">
-        <p class="drink-name">飲料名稱</p>
-      </div>
+      {{/each}}
     </div>
   </div>
 
