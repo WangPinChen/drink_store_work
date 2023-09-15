@@ -51,12 +51,13 @@ db.once('open', async () => {
     })
   }))
 
-  await Promise.all(Array.from({ length: 10 }, (_, i) => Drink.create({
+  await Promise.all(Array.from({ length: 20 }, (_, i) => Drink.create({
     name: `drink-no.${i}`,
-    createdBy: user._id
+    createdBy: user._id,
+    image: `https://loremflickr.com/540/720/drink/?random=${Math.floor(Math.random() * 100)}`
   })))
 
-  await Promise.all(Array.from({ length: 3 }, (_, i) => Store.create({
+  await Promise.all(Array.from({ length: 10 }, (_, i) => Store.create({
     name: `store-no.${i}`,
     phone: faker.phone.phoneNumber(),
     address: faker.address.streetAddress(),
