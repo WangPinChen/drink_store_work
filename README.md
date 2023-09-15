@@ -51,7 +51,7 @@ npm run seeder
 npm run dev
 ```
 7.使用
-- 終端機出現下列訊息" "App is running on http://localhost:3000"，可開啟瀏覽器輸入 http://localhost:3000 使用
+- 終端機出現下列訊息"App is running on http://localhost:3000"，可開啟瀏覽器輸入 http://localhost:3000 使用
 
 8.Seed data
 - 管理者帳號密碼預設為: admin / 12345678
