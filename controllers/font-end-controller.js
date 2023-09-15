@@ -23,7 +23,9 @@ const fontEndController = {
     res.render('stores', { cities, stores })
   },
   getDrinksPage: async (req, res) => {
-    res.render('drinks')
+    const drinks = await Drink.find({ isDelisted: false }, '-createdBy').lean()
+    console.log(drinks)
+    res.render('drinks', { drinks })
   }
 }
 

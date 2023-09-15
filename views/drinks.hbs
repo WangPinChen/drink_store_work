@@ -42,6 +42,10 @@
     margin: 1rem 0;
   }
 
+  .drink:hover {
+    box-shadow: 3px 1px 3px 3px rgba(0, 0, 0, 0.2);
+  }
+
   .drink img {
     width: 100%;
   }
@@ -69,9 +73,9 @@
     height: 2.5rem;
     padding: 0 1rem;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -50%);
     top: 5%;
-    left: 20%;
+    left: -8%;
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
   }
 
@@ -85,6 +89,7 @@
 
 {{> nav-bar}}
 <main>
+
   <div class="banner">
     <div class="text-content">
       <p class="banner-title">飲品清單</p>
@@ -97,41 +102,17 @@
   </div>
 
   <div class="drinks">
-
+    {{#each drinks}}
     <div class="drink">
-      <img src="https://i.imgur.com/pV6uBUp.jpg" alt="" class="drink-img">
+      <img src="{{this.image}}" alt="" class="drink-img">
       <div class="text-content">
-        <p class="drink-name">飲品名稱</p>
+        <p class="drink-name">{{this.name}}</p>
+        {{#if this.isPopular}}
         <p class="isTop"><i class="fa-solid fa-fire"></i> 熱門</p>
+        {{/if}}
       </div>
     </div>
-
-    <div class="drink">
-      <img src="https://i.imgur.com/pV6uBUp.jpg" alt="" class="drink-img">
-      <div class="text-content">
-        <p class="drink-name">飲品名稱</p>
-        <p class="isTop"><i class="fa-solid fa-fire"></i> 熱門</p>
-      </div>
-    </div>
-
-    <div class="drink">
-      <img src="https://i.imgur.com/pV6uBUp.jpg" alt="" class="drink-img">
-      <div class="text-content">
-        <p class="drink-name">飲品名稱</p>
-        <p class="isTop"><i class="fa-solid fa-fire"></i> 熱門</p>
-      </div>
-    </div>
-
-    <div class="drink">
-      <img src="https://i.imgur.com/pV6uBUp.jpg" alt="" class="drink-img">
-      <div class="text-content">
-        <p class="drink-name">飲品名稱</p>
-        <p class="isTop"><i class="fa-solid fa-fire"></i> 熱門</p>
-      </div>
-    </div>
-
-
-
+    {{/each}}
   </div>
 </main>
 {{> footer}}
