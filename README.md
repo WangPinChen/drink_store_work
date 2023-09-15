@@ -37,6 +37,8 @@ git clone https://github.com/WangPinChen/drink_store_work.git
 ```
 2.進入存放此專案的資料夾
 ```
+cd https://github.com/WangPinChen/drink_store_work.git
+```
 3.環境變數設定
 將根目錄.env.example檔案中輸入MongoDB的URI﹑imgur金鑰，再把.env.example檔案名稱修改為.env
 
