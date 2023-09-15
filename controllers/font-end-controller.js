@@ -12,7 +12,7 @@ const fontEndController = {
     }
     res.render('home', { topDrinks })
   },
-  getDrinksPage: async (req, res) => {
+  getStoresPage: async (req, res) => {
     const cities = await City.find().lean()
     const stores = await Store.find().populate('cityId').lean()
 
@@ -21,6 +21,9 @@ const fontEndController = {
     })
 
     res.render('stores', { cities, stores })
+  },
+  getDrinksPage: async (req, res) => {
+    res.render('drinks')
   }
 }
 
