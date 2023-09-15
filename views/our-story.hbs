@@ -1,0 +1,124 @@
+<style>
+  p {
+    margin: 0;
+  }
+
+  .banner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .banner .text-content {
+    width: 50%;
+    padding: 3rem;
+    border-right: 2rem solid brown;
+  }
+
+  .banner .text-content .banner-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: brown;
+    margin: 1rem 0;
+  }
+
+  .banner .text-content .banner-title-en {
+    letter-spacing: 3px;
+    color: gray;
+  }
+
+  .banner img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    max-width: 815px;
+  }
+
+  .our-story {
+    margin: 3rem auto;
+    width: 80%;
+  }
+
+  .story-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0;
+    background-color: #E9E5E2;
+  }
+
+  .story-container img {
+    padding: 1rem;
+  }
+
+  .our-story .text-content {
+    padding: 1rem;
+
+  }
+
+  .our-story .text-content .title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    border-bottom: 6px solid brown;
+  }
+
+  .our-story .text-content .conetet {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+</style>
+
+{{> nav-bar}}
+<main>
+  <div class="banner">
+    <div class="text-content">
+      <p class="banner-title">關於我們</p>
+      <p class="banner-title-en">
+        <i class="fa-solid fa-shop"></i>
+        Our Story
+      </p>
+    </div>
+    <img src="/images/our-story-banner.jpg" alt="">
+  </div>
+
+  <div class="our-story">
+    <div class="story-container histroy">
+      <div class="text-content">
+        <p class="title">我們的故事</p>
+        <p class="conetet">
+          　　在「幻迷饗」，我們的故事開始於遠在2000年的一個悠長的夏日。當時，我們的創辦人們熱愛著飲品的魔法，並夢想著創造一個特別的地方，讓每位客戶都能品味到獨特的奇幻滋味。我們的使命很簡單：以最優質的食材、最獨特的配方，為您呈現飲品的奇幻之味。
+        </p>
+      </div>
+      <img src="/images/our-story-img1.jpg" alt="">
+    </div>
+
+    <div class="story-container ambiance">
+      <div class="text-content">
+        <p class="title">我們的店內環境</p>
+        <p class="conetet">
+          　　走進「幻迷饗」，您將進入一個充滿魔法和驚奇的世界。我們的店內環境設計精心打造，以棕紅色調為主題，充滿著神秘感和迷人的氛圍。柔和的照明、舒適的座位和精心選擇的音樂，都讓您感受到特別的用餐體驗。
+        </p>
+      </div>
+      <img src="/images/our-story-img2.jpg" alt="">
+    </div>
+
+    <div class="story-container assurance">
+      <div class="text-content">
+        <p class="title">品質保證</p>
+        <p class="conetet">
+          　　我們對品質的承諾是「幻迷饗」的核心價值之一。我們嚴選每一種食材，追求最高的品質標準。從我們的特色飲品到小吃點心，每一道菜都經過精心設計和嚴格控制，以確保為您帶來最美味的滋味。我們深信，品質是我們的驕傲，也是您的信任之所在。
+        </p>
+      </div>
+      <img src="/images/our-story-img3.jpg" alt="">
+    </div>
+  </div>
+
+</main>
+{{> footer}}
+
+<script>
+  const storyContainer = document.querySelectorAll('.story-container')
+  for (let i = 1; i < storyContainer.length; i += 2) {
+    storyContainer[i].style.flexDirection = 'row-reverse'
+  }
+
+</script>
